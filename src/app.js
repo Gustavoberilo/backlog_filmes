@@ -1,14 +1,11 @@
-import express from 'express';
-import bodyParser from 'body-parser';
+import express from "express";//importamos o framework
+import bodyParser from "body-parser";
+import filmeRoutes from "../src/routes/filmeRoutes.js";
 
+const app = express();//objeto app recebendo o framework
 
-//constante que importa as rotas
-const app=express();
+app.use(bodyParser.json());//conversão para json
 
+app.use('/' , filmeRoutes);
 
-app.use(bodyParser.jason());
-
-app.use('/',filmeRoutes);
-
-//exportando por default tudo que foi feito 
-export default app;
+export default app;//exportando o objeto app

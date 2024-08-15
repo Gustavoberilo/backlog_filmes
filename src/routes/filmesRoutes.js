@@ -6,10 +6,20 @@ const filme = new filmeController()
 
 router.get('/' , (req , res) => {
     try{
-        Filme.BuscarTodosOsFilmes(req , res);
+        filme.BuscarTodosOsFilmes(req , res);
     }catch(err){
         res.status(500).json({erro: err.message});
     }
+});
+
+router.post('/', (req , res) => {
+    try{
+        filme.CadastrarFilme(req,res);
+    }
+    catch(err){
+        res.status(500).json({erro: err.message});
+    }
+
 });
 
 export default router;

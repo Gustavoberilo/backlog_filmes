@@ -11,3 +11,5 @@ router.get('/' , (req , res) => {
         res.status(500).json({erro: err.message});
     }
 });
+
+export default router;

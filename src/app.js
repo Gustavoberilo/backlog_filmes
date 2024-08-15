@@ -1,6 +1,6 @@
 import express from "express";//importamos o framework
 import bodyParser from "body-parser";
-import filmeRoutes from "../src/routes/filmeRoutes.js";
+import filmeRoutes from "../src/routes/filmesRoutes.js";
 
 const app = express();//objeto app recebendo o framework
 

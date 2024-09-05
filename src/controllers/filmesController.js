@@ -34,4 +34,21 @@ export default class Filmes {
             res.status(500).json({erro: err.message});
         }
     }
+    async AtualizarFilme(req , res){
+        try {
+            const [atualizado] = await filmeModel.update(req.body,{
+                where: {id: req.params.id}
+            });
+            if(!atualizado){
+                return res.status(404).json({erro: 'Nenhum filme atualizado'});
+            }
+            const filmeAtualizado = await filmeModel.findByPk(req.params.id);
+            return res.json({mensagem: "Filme atualizado com sucesso!" , filme: filmeAtualizado})
+                
+               
+            
+        } catch (err) {
+            res.status(500).json({erro: err.message});
+        }
+    }
 }

@@ -38,4 +38,22 @@ router.put('/:id', (req , res)=>{
         res.status(500).json({erro: err.message});
     }
 });
+
+router.delete('/:id',(req , res)=>{
+    try {
+        filme.DeletarFilme(req , res);
+    } catch (err) {
+        res.status(500).json({erro: err.message});
+    }
+});
+
+router.post('/busca',(req , res)=>{
+    try {
+        filme.BuscarFilmePorTitulo(req,res);
+    } catch (err) {
+        res.status(500).json({erro: err.message});
+    }
+});
+
+
 export default router;

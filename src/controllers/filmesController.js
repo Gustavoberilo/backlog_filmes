@@ -16,7 +16,7 @@ export default class Filmes {
             const filmeEncontrado = await filmeModel.findByPk(req.params.id);
             if(!filmeEncontrado){
                 //Sem o return corre o risco do servidor mandar as duas respostas e ele cair
-                return res.status(404).json({erro: 'Filme não encontrado'});
+                return res.status(204).status(404).json({erro: 'Filme não encontrado'});
             }
             return res.json(filmeEncontrado);
         }
@@ -43,12 +43,41 @@ export default class Filmes {
                 return res.status(404).json({erro: 'Nenhum filme atualizado'});
             }
             const filmeAtualizado = await filmeModel.findByPk(req.params.id);
-            return res.json({mensagem: "Filme atualizado com sucesso!" , filme: filmeAtualizado})
+            return res.json({message: "Filme atualizado com sucesso!" , filme: filmeAtualizado})
                 
-               
-            
         } catch (err) {
             res.status(500).json({erro: err.message});
         }
     }
+    async DeletarFilme(req , res){
+        try {
+            const FilmeDeletado = await filmeModel.destroy({
+                where: { id: req.params.id }
+            });
+            if(!FilmeDeletado){
+                return res.status(404).json({erro: "Filme não encontrado"});
+            }
+            return res.json({message: "Filme deletado com sucesso!"});
+
+        } catch (err) {
+            res.status(500).json({erro: err.message});
+        }
+    }
+
+    async BuscarFilmePorTitulo(req , res){
+        try{
+            const filmeEncontrado = await filmeModel.findOne({
+                where: {titulo: req.body.titulo}
+            });
+            if(!filmeEncontrado){
+                //Sem o return corre o risco do servidor mandar as duas respostas e ele cair
+                return res.status(204).status(404).json({erro: 'Filme não encoVelozes & Furiososntrado'});
+            }
+            return res.json({genero: filmeEncontrado.genero , ano: filmeEncontrado.ano});
+        }
+        catch(err){
+            res.status(500).json({erro: err.message});
+        }
+    }
+
 }
